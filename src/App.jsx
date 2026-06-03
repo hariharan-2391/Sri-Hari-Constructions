@@ -325,7 +325,7 @@ function About() {
       <div style={S.aboutGrid}>
         <div>
           <div style={S.sectionTag}>— About Us</div>
-          <h2 style={S.sectionTitle}>Building Homes, Building Trust</h2>
+          <h2 style={S.sectionTitle}>Building Structures,Building Trust</h2>
           <div style={S.divider} />
           <p style={S.aboutLeftP}>Sri Hari Constructions is a trusted construction and infrastructure company based in Chennai, committed to delivering high-quality residential, commercial, and interior projects with precision and professionalism.</p>
           <p style={S.aboutLeftP}>With a strong foundation built on quality workmanship, innovative engineering, and customer satisfaction, we specialize in creating modern spaces that combine durability, functionality, and elegant design.</p>
