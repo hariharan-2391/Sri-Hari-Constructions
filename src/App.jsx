@@ -19,7 +19,7 @@ import g10 from "./assets/images/gallery/10-ram-nagar-urapakkam.jpg";
 import g11 from "./assets/images/gallery/11-saidapet.jpg";
 import g12 from "./assets/images/gallery/12-sowndariyam.jpg";
 import g13 from "./assets/images/gallery/13-orapakkam.jpg";
-import g14 from "./assets/images/gallery/14-thirunindravur.jpg";
+import g14 from "./assets/images/gallery/14-thirunnpm run decindravur.jpg";
 import g15 from "./assets/images/gallery/15-sealyiur-thambaram.jpg";
 import g16 from "./assets/images/gallery/16-alcon-nagar.jpg";
 import g17 from "./assets/images/gallery/17-aurl-nagar.jpg";
