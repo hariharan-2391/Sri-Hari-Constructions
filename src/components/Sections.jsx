@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 
-import logoImg from "../assets/images/logo.jpg";
+import planningImage from "../assets/images/planning_and_consultation.jpg";
+import designImage from "../assets/images/design_and_engg.jpg";
+import constructionImage from "../assets/images/construction_and_delivery.jpg";
+import logoImg from "../assets/images/logo.png";
 
 function LogoMark({ size = 48 }) {
   return (
@@ -302,6 +305,7 @@ export function CEO({ styles }) {
 
 export function Process({ styles, steps }) {
   const [hovered, setHovered] = useState(null);
+  const stepImages = [planningImage, designImage, constructionImage];
 
   return (
     <section
@@ -329,6 +333,11 @@ export function Process({ styles, steps }) {
               onMouseEnter={() => setHovered(index)}
               onMouseLeave={() => setHovered(null)}
             >
+              <img
+                src={stepImages[index]}
+                alt={step.title}
+                style={styles.stepImage}
+              />
               <div style={styles.stepNum}>{step.num}</div>
               <h3 style={styles.stepH3}>{step.title}</h3>
               <p style={styles.stepP}>{step.desc}</p>
@@ -449,86 +458,6 @@ export function Interiors({ styles, projects, images, onOpen }) {
               styles={styles}
             />
           ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function TypeTag({ type, styles }) {
-  if (type === "c") return <span style={styles.tagC}>Commercial</span>;
-  if (type === "m") return <span style={styles.tagM}>Mixed</span>;
-  return <span style={styles.tagR}>Residential</span>;
-}
-
-export function Portfolio({ styles, rows }) {
-  return (
-    <section
-      id="projects"
-      aria-labelledby="portfolio-title"
-      style={styles.projectsSection}
-      className="projects-shell"
-    >
-      <div style={styles.projectsInner}>
-        <div style={{ maxWidth: 620, marginBottom: "2.8rem" }}>
-          <div style={styles.sectionTag}>— Full Portfolio</div>
-          <h2
-            id="portfolio-title"
-            className="section-title"
-            style={styles.sectionTitle}
-          >
-            A Track Record of Excellence
-          </h2>
-          <div style={styles.divider} />
-          <p style={{ color: "#8a9bc4", lineHeight: 1.8, fontSize: ".97rem" }}>
-            Since 2004, Sri Hari Constructions has delivered residential,
-            commercial, and mixed-use projects across Chennai — totalling crores
-            of rupees in construction value.
-          </p>
-        </div>
-        <div style={styles.tblWrap}>
-          <table style={styles.table} className="portfolio-table">
-            <thead>
-              <tr>
-                {[
-                  "Client",
-                  "Type",
-                  "Location",
-                  "Period",
-                  "Area (sqft)",
-                  "Value (₹)",
-                ].map((heading) => (
-                  <th key={heading} style={styles.th}>
-                    {heading}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((row, index) => (
-                <tr key={`${row.client}-${index}`}>
-                  <td style={styles.tdFirst} data-label="Client">
-                    {row.client}
-                  </td>
-                  <td style={styles.td} data-label="Type">
-                    <TypeTag type={row.type} styles={styles} />
-                  </td>
-                  <td style={styles.td} data-label="Location">
-                    {row.location}
-                  </td>
-                  <td style={styles.td} data-label="Period">
-                    {row.period}
-                  </td>
-                  <td style={styles.td} data-label="Area (sqft)">
-                    {row.area}
-                  </td>
-                  <td style={styles.td} data-label="Value (₹)">
-                    {row.value}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
         </div>
       </div>
     </section>
