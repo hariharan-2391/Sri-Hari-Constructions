@@ -670,7 +670,8 @@ export function Contact({ styles }) {
                 <p>Thank you! We'll be in touch shortly.</p>
               </div>
             ) : (
-              <form onSubmit={submit}>
+              <form onSubmit={submit} style={styles.formBody}>
+                <div style={styles.formSectionTitle}>Project Details</div>
                 <div style={styles.frow}>
                   <div style={styles.fgrp}>
                     <label style={styles.fgrpLabel}>Full Name</label>
@@ -701,25 +702,46 @@ export function Contact({ styles }) {
                     })}
                   />
                 </div>
-                <div style={styles.fgrp}>
-                  <label style={styles.fgrpLabel}>Project Type</label>
-                  <select
-                    {...inputProps("ProjectType", {
-                      required: true,
-                      style: { ...styles.fgrpInput, appearance: "none" },
-                    })}
-                  >
-                    <option value="">Select Project Type</option>
-                    {[
-                      "Residential Construction",
-                      "Commercial Construction",
-                      "Renovation",
-                      "Interior Design",
-                      "Infrastructure Project",
-                    ].map((option) => (
-                      <option key={option}>{option}</option>
-                    ))}
-                  </select>
+                <div style={styles.frow}>
+                  <div style={styles.fgrp}>
+                    <label style={styles.fgrpLabel}>Project Type</label>
+                    <select
+                      {...inputProps("ProjectType", {
+                        required: true,
+                        style: { ...styles.fgrpInput, appearance: "none" },
+                      })}
+                    >
+                      <option value="">Select</option>
+                      {[
+                        "Residential Construction",
+                        "Commercial Construction",
+                        "Renovation",
+                        "Interior Design",
+                        "Infrastructure Project",
+                      ].map((option) => (
+                        <option key={option}>{option}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div style={styles.fgrp}>
+                    <label style={styles.fgrpLabel}>Estimated Budget</label>
+                    <select
+                      {...inputProps("Budget", {
+                        style: { ...styles.fgrpInput, appearance: "none" },
+                      })}
+                    >
+                      <option value="">Select</option>
+                      {[
+                        "Below ₹10 Lakhs",
+                        "₹10 - ₹25 Lakhs",
+                        "₹25 - ₹50 Lakhs",
+                        "₹50 Lakhs - ₹1 Crore",
+                        "Above ₹1 Crore",
+                      ].map((option) => (
+                        <option key={option}>{option}</option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
                 <div style={styles.fgrp}>
                   <label style={styles.fgrpLabel}>Project Location</label>
@@ -730,35 +752,16 @@ export function Contact({ styles }) {
                   />
                 </div>
                 <div style={styles.fgrp}>
-                  <label style={styles.fgrpLabel}>Estimated Budget</label>
-                  <select
-                    {...inputProps("Budget", {
-                      style: { ...styles.fgrpInput, appearance: "none" },
-                    })}
-                  >
-                    <option value="">Select Budget</option>
-                    {[
-                      "Below ₹10 Lakhs",
-                      "₹10 - ₹25 Lakhs",
-                      "₹25 - ₹50 Lakhs",
-                      "₹50 Lakhs - ₹1 Crore",
-                      "Above ₹1 Crore",
-                    ].map((option) => (
-                      <option key={option}>{option}</option>
-                    ))}
-                  </select>
-                </div>
-                <div style={styles.fgrp}>
                   <label style={styles.fgrpLabel}>Message</label>
                   <textarea
                     {...inputProps("Message", {
                       placeholder: "Tell us about your project requirements...",
-                      rows: 6,
+                      rows: 4,
                       required: true,
                       style: {
                         ...styles.fgrpInput,
                         resize: "vertical",
-                        minHeight: 100,
+                        minHeight: 92,
                       },
                     })}
                   />
