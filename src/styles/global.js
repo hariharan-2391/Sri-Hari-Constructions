@@ -40,25 +40,33 @@ button,input,select,textarea{font:inherit}
   .site-nav-toggle{display:flex!important}
   .site-nav-links.open{display:flex!important;flex-direction:column;align-items:flex-start;width:100%;padding-top:.75rem}
   .hero-shell{padding:6.5rem 1rem 3rem!important}
-  .hero-stats{flex-direction:column;align-items:flex-start;gap:1rem!important}
-  .hero-btns{width:100%;flex-direction:column!important}
-  .hero-btns button{width:100%}
+  .hero-inner{gap:1.4rem!important}
+  .hero-content,.hero-visual{min-width:0;width:100%}
+  .hero-stats{flex-direction:column;align-items:flex-start;gap:1rem!important;margin-top:2rem!important}
+  .hero-btns{width:100%;flex-direction:column!important;gap:.8rem!important}
+  .hero-btns button{width:100%;padding:.9rem 1rem!important}
+  .hero-visual{min-height:280px!important}
+  .hero-visual img{min-height:280px!important}
   .about-shell,.how-shell,.gallery-shell,.interior-shell,.projects-shell,.contact-shell{padding:4.75rem 1rem!important}
+  .about-grid,.contact-grid{grid-template-columns:1fr!important;gap:2rem!important}
+  .about-values,.contact-form{padding:1.25rem!important}
   .steps-grid,.gallery-grid{grid-template-columns:1fr!important}
+  .step{padding:1.5rem 1.25rem!important}
   .contact-form{padding:1.25rem!important}
-  .contact-item{flex-direction:column!important}
-  .about-media{min-height:320px!important}
-  .about-media img{height:100%!important}
-  .portfolio-table{width:100%;display:block;border-collapse:separate;border-spacing:0}
+  .contact-item{flex-direction:column!important;gap:.6rem!important}
+  .frow{grid-template-columns:1fr!important;gap:.7rem!important}
+  .portfolio-table{width:100%;display:block;border-collapse:separate;border-spacing:0;table-layout:fixed}
   .portfolio-table thead{display:none}
   .portfolio-table tbody{display:flex;flex-direction:column;gap:.9rem}
-  .portfolio-table tbody tr{display:block;background:#111c35;border:1px solid rgba(245,166,35,.15);border-radius:10px;padding:1rem;box-shadow:0 10px 24px rgba(0,0,0,.2)}
-  .portfolio-table tbody td{display:grid;grid-template-columns:92px minmax(0,1fr);gap:.45rem;padding:.4rem 0;border:none}
-  .portfolio-table tbody td::before{content:attr(data-label);font-size:.68rem;color:#f5a623;text-transform:uppercase;letter-spacing:.09em;font-weight:700}
+  .portfolio-table tbody tr{display:block;background:#111c35;border:1px solid rgba(245,166,35,.15);border-radius:12px;padding:1rem;box-shadow:0 10px 24px rgba(0,0,0,.2)}
+  .portfolio-table tbody td{display:flex;flex-direction:column;gap:.2rem;padding:.45rem 0;border:none;white-space:normal;word-break:break-word;line-height:1.45}
+  .portfolio-table tbody td::before{content:attr(data-label);display:block;font-size:.64rem;color:#f5a623;text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:.15rem}
   .portfolio-table tbody td:first-child{padding-top:0}
-  .portfolio-table tbody td:last-child{padding-bottom:0}
-  .section-title{font-size:clamp(1.7rem,7vw,2.25rem)!important}
+  .portfolio-table tbody td:last-child{padding-bottom:0;border-bottom:none}
+  .section-title{font-size:clamp(1.7rem,7vw,2.25rem)!important;line-height:1.15!important}
   .hero-h1{font-size:clamp(2.2rem,10vw,3rem)!important}
-  .hero-p{font-size:.95rem!important}
+  .hero-p{font-size:.95rem!important;line-height:1.75!important}
+  .hero-badge{margin-bottom:1.25rem!important}
+  .hero-img-badge{left:1rem!important;bottom:1rem!important;padding:.75rem 1rem!important}
 }
 `;
