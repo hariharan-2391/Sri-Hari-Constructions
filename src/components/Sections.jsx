@@ -196,9 +196,6 @@ export function About({ styles, values }) {
     <section id="about" style={styles.aboutSection} className="about-shell">
       <div style={styles.aboutInner}>
         <div style={styles.aboutGrid} className="about-grid">
-          <div style={styles.aboutImgWrap} className="about-media">
-            <div style={styles.aboutImgBadge}>Est. 2004 · Chennai</div>
-          </div>
           <div>
             <div style={styles.sectionTag}>— About Us</div>
             <h2 className="section-title" style={styles.sectionTitle}>
@@ -222,28 +219,28 @@ export function About({ styles, values }) {
               every project is completed with attention to detail, safety
               standards, and timely completion.
             </p>
-            <div style={styles.aboutRight} className="about-values">
-              <div
-                style={{
-                  position: "absolute",
-                  top: -1,
-                  left: "2rem",
-                  width: 55,
-                  height: 3,
-                  background: "#f5a623",
-                }}
-              />
-              <h3 style={styles.aboutRightH3}>Our Core Values</h3>
-              {values.map((value) => (
-                <div key={value.title} style={styles.valueItem}>
-                  <div style={styles.valueIcon}>◆</div>
-                  <div>
-                    <strong style={styles.valueStrong}>{value.title}</strong>
-                    <span style={styles.valueSpan}>{value.desc}</span>
-                  </div>
+          </div>
+          <div style={styles.aboutRight} className="about-values">
+            <div
+              style={{
+                position: "absolute",
+                top: -1,
+                left: "2rem",
+                width: 55,
+                height: 3,
+                background: "#f5a623",
+              }}
+            />
+            <h3 style={styles.aboutRightH3}>Our Core Values</h3>
+            {values.map((value) => (
+              <div key={value.title} style={styles.valueItem}>
+                <div style={styles.valueIcon}>◆</div>
+                <div>
+                  <strong style={styles.valueStrong}>{value.title}</strong>
+                  <span style={styles.valueSpan}>{value.desc}</span>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -474,14 +471,24 @@ export function Portfolio({ styles, rows }) {
             <tbody>
               {rows.map((row, index) => (
                 <tr key={`${row.client}-${index}`}>
-                  <td style={styles.tdFirst}>{row.client}</td>
-                  <td style={styles.td}>
+                  <td style={styles.tdFirst} data-label="Client">
+                    {row.client}
+                  </td>
+                  <td style={styles.td} data-label="Type">
                     <TypeTag type={row.type} styles={styles} />
                   </td>
-                  <td style={styles.td}>{row.location}</td>
-                  <td style={styles.td}>{row.period}</td>
-                  <td style={styles.td}>{row.area}</td>
-                  <td style={styles.td}>{row.value}</td>
+                  <td style={styles.td} data-label="Location">
+                    {row.location}
+                  </td>
+                  <td style={styles.td} data-label="Period">
+                    {row.period}
+                  </td>
+                  <td style={styles.td} data-label="Area (sqft)">
+                    {row.area}
+                  </td>
+                  <td style={styles.td} data-label="Value (₹)">
+                    {row.value}
+                  </td>
                 </tr>
               ))}
             </tbody>

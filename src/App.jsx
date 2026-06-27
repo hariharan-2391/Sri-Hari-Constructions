@@ -99,6 +99,8 @@ const globalCSS = `
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:#111c35;color:#fff;overflow-x:hidden;line-height:1.6}
+body,p,span,a,li,button,input,select,textarea,td,th{font-family:'DM Sans',sans-serif}
+h1,h2,h3,h4,h5,h6,.section-title,.hero-h1{font-family:'Playfair Display',serif}
 img{max-width:100%;display:block}
 button,input,select,textarea{font:inherit}
 :root{
@@ -141,7 +143,16 @@ button,input,select,textarea{font:inherit}
   .steps-grid,.gallery-grid{grid-template-columns:1fr!important}
   .contact-form{padding:1.25rem!important}
   .contact-item{flex-direction:column!important}
-  .portfolio-table{min-width:760px}
+  .about-media{min-height:320px!important}
+  .about-media img{height:100%!important}
+  .portfolio-table{width:100%;display:block;border-collapse:separate;border-spacing:0}
+  .portfolio-table thead{display:none}
+  .portfolio-table tbody{display:flex;flex-direction:column;gap:.9rem}
+  .portfolio-table tbody tr{display:block;background:#111c35;border:1px solid rgba(245,166,35,.15);border-radius:10px;padding:1rem;box-shadow:0 10px 24px rgba(0,0,0,.2)}
+  .portfolio-table tbody td{display:grid;grid-template-columns:92px minmax(0,1fr);gap:.45rem;padding:.4rem 0;border:none}
+  .portfolio-table tbody td::before{content:attr(data-label);font-size:.68rem;color:#f5a623;text-transform:uppercase;letter-spacing:.09em;font-weight:700}
+  .portfolio-table tbody td:first-child{padding-top:0}
+  .portfolio-table tbody td:last-child{padding-bottom:0}
   .section-title{font-size:clamp(1.7rem,7vw,2.25rem)!important}
   .hero-h1{font-size:clamp(2.2rem,10vw,3rem)!important}
   .hero-p{font-size:.95rem!important}
