@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 
-// ─── Image Imports ───────────────────────────────────────────────
-// Save your logo as: src/assets/images/logo.jpg  (or .png / .webp)
 import logoImg from "./assets/images/logo.jpg";
 
 import heroImg from "./assets/images/hero.jpg";
@@ -84,7 +82,6 @@ const IMAGES = {
   ],
 };
 
-// ─── Global CSS ──────────────────────────────────────────────────
 const globalCSS = `
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
