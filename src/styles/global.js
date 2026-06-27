@@ -52,12 +52,14 @@ button,input,select,textarea{font:inherit}
   .about-values,.contact-form{padding:1.25rem!important}
   .steps-grid,.gallery-grid{grid-template-columns:1fr!important}
   .step{padding:1.5rem 1.25rem!important}
-  .contact-form{padding:1.25rem!important;overflow:hidden}
+  .contact-form{padding:1.1rem!important;overflow:hidden;max-width:100%}
   .contact-item{flex-direction:column!important;gap:.6rem!important}
   .frow{grid-template-columns:1fr!important;gap:.7rem!important}
   .contact-shell{padding-bottom:3.5rem!important}
-  .contact-form button{width:100%!important;padding:.9rem 1rem!important;font-size:.9rem!important}
-  .contact-form form{gap:.75rem!important}
+  .contact-form button{width:100%!important;padding:.9rem 1rem!important;font-size:.9rem!important;box-sizing:border-box}
+  .contact-form form{gap:.75rem!important;max-width:100%!important}
+  .contact-form input,.contact-form select,.contact-form textarea{width:100%!important;max-width:100%!important;box-sizing:border-box!important}
+  .contact-form textarea{min-height:96px!important}
   .portfolio-table{width:100%;display:block;border-collapse:separate;border-spacing:0;table-layout:fixed}
   .portfolio-table thead{display:none}
   .portfolio-table tbody{display:flex;flex-direction:column;gap:.9rem}
