@@ -7,6 +7,8 @@ function LogoMark({ size = 48 }) {
     <img
       src={logoImg}
       alt="Sri Hari Constructions Logo"
+      loading="eager"
+      decoding="async"
       style={{
         height: size,
         width: "auto",
@@ -184,6 +186,8 @@ export function Hero({ styles, stats, heroImage }) {
           <img
             src={heroImage}
             alt="Featured Project – Korattur, Chennai"
+            loading="eager"
+            decoding="async"
             style={styles.heroImg}
           />
           <div style={styles.heroImgBadge}>
@@ -354,6 +358,8 @@ function GalleryCard({ item, img, onOpen, styles }) {
       <img
         src={img}
         alt={item.desc}
+        loading="lazy"
+        decoding="async"
         style={{
           ...styles.gcardImg,
           transform: hovered ? "scale(1.07)" : "scale(1)",

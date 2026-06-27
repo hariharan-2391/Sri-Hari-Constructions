@@ -1,16 +1,55 @@
-# React + Vite
+# Sri Hari Constructions
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sri Hari Constructions is a polished, responsive React landing page for a construction and interior design company in Chennai. The site highlights the company’s portfolio, process, values, and contact flow while keeping the experience fast and easy to maintain.
 
-Currently, two official plugins are available:
+## Highlights
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Responsive single-page experience for mobile, tablet, and desktop
+- Modular section components with centralized content and image data
+- SEO-ready metadata, accessible landmarks, and clear section structure
+- Optimized production build with Vite and deferred image loading
+- Contact form integration for project enquiries
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- Vite 8
+- ESLint for code quality
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- src/App.jsx — page composition and app state
+- src/components/Sections.jsx — reusable section components
+- src/components/LogoMark.jsx — shared logo component
+- src/config/content.js — page content and portfolio data
+- src/config/images.js — centralized image imports
+- src/styles/global.js — global styles injected into the app
+
+## Getting Started
+
+1. Install dependencies
+   ```bash
+   npm install
+   ```
+2. Start the development server
+   ```bash
+   npm run dev
+   ```
+3. Build for production
+   ```bash
+   npm run build
+   ```
+4. Preview the production build locally
+   ```bash
+   npm run preview
+   ```
+
+## Performance Notes
+
+- Images in project and interior galleries are loaded lazily to reduce initial page weight.
+- The production build uses Vite’s esbuild minification and chunking to keep the bundle efficient.
+- Global styles and content are separated from the main app file to improve maintainability and future updates.
+
+## Deployment
+
+The site is ready to deploy to any static hosting provider such as Vercel, Netlify, or GitHub Pages.
