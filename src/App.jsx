@@ -1,6 +1,18 @@
 import { useState, useEffect } from "react";
 
 import logoImg from "./assets/images/logo.jpg";
+import {
+  Navbar as NavbarSection,
+  Hero as HeroSection,
+  About as AboutSection,
+  CEO as CEOSection,
+  Process as ProcessSection,
+  Gallery as GallerySection,
+  Interiors as InteriorsSection,
+  Portfolio as PortfolioSection,
+  Contact as ContactSection,
+  Lightbox as LightboxSection,
+} from "./components/Sections";
 
 import heroImg from "./assets/images/hero.jpg";
 
@@ -86,14 +98,16 @@ const globalCSS = `
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:#111c35;color:#fff;overflow-x:hidden}
+body{font-family:'DM Sans',sans-serif;background:#111c35;color:#fff;overflow-x:hidden;line-height:1.6}
+img{max-width:100%;display:block}
+button,input,select,textarea{font:inherit}
 :root{
   --navy:#1a2744;--navy-dark:#111c35;--gold:#f5a623;--gold-light:#ffc145;
   --white:#fff;--off-white:#f5f2ed;--muted:#8a9bc4;
   --max-w:1400px;
   --px:6%;
 }
-/* ── Expanded container helper ── */
+#root{min-height:100vh;width:100%}
 .site-inner{max-width:var(--max-w);margin:0 auto;width:100%}
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -103,6 +117,35 @@ body{font-family:'DM Sans',sans-serif;background:#111c35;color:#fff;overflow-x:h
 .anim-delay3{animation-delay:.38s}
 .anim-delay4{animation-delay:.5s}
 .anim-delay5{animation-delay:.62s}
+.site-nav-toggle{display:none!important}
+@media (max-width: 960px){
+  .hero-shell{padding:7.5rem 1.25rem 3.5rem!important}
+  .hero-inner{grid-template-columns:1fr!important;gap:2rem!important}
+  .hero-stats{flex-wrap:wrap;gap:1.25rem 1.5rem!important}
+  .about-shell,.how-shell,.gallery-shell,.interior-shell,.projects-shell,.contact-shell{padding:5.5rem 1.25rem!important}
+  .about-grid,.contact-grid{grid-template-columns:1fr!important;gap:2rem!important}
+  .steps-grid,.gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .frow{grid-template-columns:1fr!important}
+}
+@media (max-width: 640px){
+  .site-nav-inner{padding:0.9rem 1rem!important}
+  .site-nav-links{display:none!important}
+  .site-nav-cta{display:none!important}
+  .site-nav-toggle{display:flex!important}
+  .site-nav-links.open{display:flex!important;flex-direction:column;align-items:flex-start;width:100%;padding-top:.75rem}
+  .hero-shell{padding:6.5rem 1rem 3rem!important}
+  .hero-stats{flex-direction:column;align-items:flex-start;gap:1rem!important}
+  .hero-btns{width:100%;flex-direction:column!important}
+  .hero-btns button{width:100%}
+  .about-shell,.how-shell,.gallery-shell,.interior-shell,.projects-shell,.contact-shell{padding:4.75rem 1rem!important}
+  .steps-grid,.gallery-grid{grid-template-columns:1fr!important}
+  .contact-form{padding:1.25rem!important}
+  .contact-item{flex-direction:column!important}
+  .portfolio-table{min-width:760px}
+  .section-title{font-size:clamp(1.7rem,7vw,2.25rem)!important}
+  .hero-h1{font-size:clamp(2.2rem,10vw,3rem)!important}
+  .hero-p{font-size:.95rem!important}
+}
 `;
 
 // ─── Static Data ─────────────────────────────────────────────────
@@ -472,6 +515,8 @@ const S = {
     alignItems: "center",
     justifyContent: "space-between",
     padding: "1rem 6%",
+    flexWrap: "wrap",
+    gap: "1rem",
   },
   navBrand: {
     display: "flex",
@@ -497,7 +542,19 @@ const S = {
     textTransform: "uppercase",
     marginTop: 2,
   },
-  navLinks: { display: "flex", gap: "2.2rem", listStyle: "none" },
+  navLinks: {
+    display: "flex",
+    gap: "2.2rem",
+    listStyle: "none",
+    alignItems: "center",
+  },
+  navLinksOpen: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    width: "100%",
+    paddingTop: ".75rem",
+  },
   navLink: {
     color: "#8a9bc4",
     textDecoration: "none",
@@ -521,6 +578,18 @@ const S = {
     border: "none",
     fontFamily: "'DM Sans',sans-serif",
     transition: "background .2s",
+  },
+  navMenuBtn: {
+    display: "none",
+    alignItems: "center",
+    justifyContent: "center",
+    border: "1px solid rgba(245,166,35,.3)",
+    background: "rgba(245,166,35,.08)",
+    color: "#f5a623",
+    width: 42,
+    height: 42,
+    borderRadius: 4,
+    cursor: "pointer",
   },
 
   // ── Hero ──
@@ -1110,670 +1179,66 @@ function LogoMark({ size = 48 }) {
 
 // ─── Navbar ──────────────────────────────────────────────────────
 function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", fn);
-    return () => window.removeEventListener("scroll", fn);
-  }, []);
-  const go = (id) =>
-    document
-      .getElementById(id.replace("#", ""))
-      ?.scrollIntoView({ behavior: "smooth" });
-  return (
-    <nav
-      style={{
-        ...S.nav,
-        boxShadow: scrolled ? "0 4px 28px rgba(0,0,0,.45)" : "none",
-      }}
-    >
-      <div style={S.navInner}>
-        {/* ── Logo ── */}
-        <div
-          style={S.navBrand}
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        >
-          <LogoMark size={46} />
-          <div style={S.navWordmark}>
-            <span style={S.navWordmarkTop}>SRI HARI</span>
-            <span style={S.navWordmarkBot}>Constructions</span>
-          </div>
-        </div>
-
-        <ul style={S.navLinks}>
-          {NAV_LINKS.map((l) => (
-            <li key={l.href}>
-              <a
-                style={S.navLink}
-                onClick={() => go(l.href)}
-                onMouseEnter={(e) => (e.target.style.color = "#f5a623")}
-                onMouseLeave={(e) => (e.target.style.color = "#8a9bc4")}
-              >
-                {l.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-        <button
-          style={S.navCta}
-          onClick={() => go("#contact")}
-          onMouseEnter={(e) => (e.target.style.background = "#ffc145")}
-          onMouseLeave={(e) => (e.target.style.background = "#f5a623")}
-        >
-          Get a Quote
-        </button>
-      </div>
-    </nav>
-  );
+  return <NavbarSection styles={S} links={NAV_LINKS} />;
 }
 
 // ─── Hero ─────────────────────────────────────────────────────────
 function Hero() {
-  return (
-    <section
-      style={{
-        position: "relative",
-        overflow: "hidden",
-        background: "#111c35",
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        padding: "8rem 6% 5rem",
-      }}
-    >
-      <div style={S.heroBg} />
-      <div style={S.heroGrid} />
-      <div style={{ ...S.heroInner, position: "relative", zIndex: 2 }}>
-        <div style={S.heroContent}>
-          <div className="anim anim-delay1" style={S.heroBadge}>
-            Est. 2004 · Porur, Chennai
-          </div>
-          <h1 className="anim anim-delay2" style={S.heroH1}>
-            Building Spaces<em style={S.heroEm}>That Last.</em>
-          </h1>
-          <p className="anim anim-delay3" style={S.heroP}>
-            Residential, commercial and infrastructure construction delivered
-            with precision, quality craftsmanship, and unwavering integrity —
-            from foundation to final handover.
-          </p>
-          <div className="anim anim-delay4" style={S.heroBtns}>
-            <button
-              style={S.btnPrimary}
-              onClick={() =>
-                document
-                  .getElementById("gallery")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
-              onMouseEnter={(e) => (e.target.style.background = "#ffc145")}
-              onMouseLeave={(e) => (e.target.style.background = "#f5a623")}
-            >
-              View Our Projects
-            </button>
-            <button
-              style={S.btnOutline}
-              onClick={() =>
-                document
-                  .getElementById("contact")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
-              onMouseEnter={(e) =>
-                (e.target.style.background = "rgba(245,166,35,.08)")
-              }
-              onMouseLeave={(e) => (e.target.style.background = "transparent")}
-            >
-              Start Your Project
-            </button>
-          </div>
-          <div className="anim anim-delay5" style={S.heroStats}>
-            {STATS.map((s) => (
-              <div key={s.label}>
-                <div style={S.statNum}>{s.num}</div>
-                <div style={S.statLabel}>{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div style={S.heroImgWrap}>
-          <img
-            src={IMAGES.hero}
-            alt="Featured Project – Korattur, Chennai"
-            style={S.heroImg}
-          />
-          <div style={S.heroImgBadge}>
-            Featured Project
-            <span style={S.heroImgBadgeSpan}>Korattur, Chennai</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+  return <HeroSection styles={S} stats={STATS} heroImage={IMAGES.hero} />;
 }
 
 // ─── About ────────────────────────────────────────────────────────
 function About() {
-  return (
-    <section id="about" style={S.aboutSection}>
-      <div style={S.aboutInner}>
-        <div style={S.aboutGrid}>
-          <div style={S.aboutImgWrap}>
-            <div style={S.aboutImgBadge}>Est. 2004 · Chennai</div>
-          </div>
-          <div>
-            <div style={S.sectionTag}>— About Us</div>
-            <h2 style={S.sectionTitle}>Building Homes, Building Trust</h2>
-            <div style={S.divider} />
-            <p style={S.aboutLeftP}>
-              Sri Hari Constructions is a trusted construction and
-              infrastructure company based in Chennai, committed to delivering
-              high-quality residential, commercial, and interior projects with
-              precision and professionalism.
-            </p>
-            <p style={S.aboutLeftP}>
-              With a strong foundation built on quality workmanship, innovative
-              engineering, and customer satisfaction, we specialize in creating
-              modern spaces that combine durability, functionality, and elegant
-              design.
-            </p>
-            <p style={S.aboutLeftP}>
-              From planning and execution to final delivery, our team ensures
-              every project is completed with attention to detail, safety
-              standards, and timely completion.
-            </p>
-            <div style={S.aboutRight}>
-              <div
-                style={{
-                  position: "absolute",
-                  top: -1,
-                  left: "2rem",
-                  width: 55,
-                  height: 3,
-                  background: "#f5a623",
-                }}
-              />
-              <h3 style={S.aboutRightH3}>Our Core Values</h3>
-              {CORE_VALUES.map((v) => (
-                <div key={v.title} style={S.valueItem}>
-                  <div style={S.valueIcon}>◆</div>
-                  <div>
-                    <strong style={S.valueStrong}>{v.title}</strong>
-                    <span style={S.valueSpan}>{v.desc}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+  return <AboutSection styles={S} values={CORE_VALUES} />;
 }
 
 // ─── CEO ──────────────────────────────────────────────────────────
 function CEO() {
-  return (
-    <section id="ceo" style={S.ceoSection}>
-      <div
-        style={{
-          position: "absolute",
-          top: "-3rem",
-          left: "3%",
-          fontFamily: "'Playfair Display',serif",
-          fontSize: "18rem",
-          color: "rgba(245,166,35,.04)",
-          lineHeight: 1,
-          pointerEvents: "none",
-          userSelect: "none",
-        }}
-      >
-        "
-      </div>
-      <div style={S.ceoInner}>
-        <div style={S.sectionTag}>— CEO Message</div>
-        <blockquote style={S.blockquote}>
-          "We believe every project is an opportunity to create something
-          meaningful and lasting. Our mission is to deliver modern construction
-          solutions with uncompromising quality, integrity, and customer focus —
-          combining advanced construction practices with skilled craftsmanship
-          and innovative thinking."
-        </blockquote>
-        <div style={S.ceoSig}>
-          D. Durairaj
-          <span style={S.ceoSigSpan}>
-            Chief Executive Officer, Sri Hari Constructions
-          </span>
-        </div>
-      </div>
-    </section>
-  );
+  return <CEOSection styles={S} />;
 }
 
 // ─── Process ──────────────────────────────────────────────────────
 function Process() {
-  const [hov, setHov] = useState(null);
-  return (
-    <section id="how" style={S.howSection}>
-      <div style={S.howInner}>
-        <div style={S.sectionTag}>— Our Process</div>
-        <h2 style={S.sectionTitle}>How We Work</h2>
-        <div style={S.divider} />
-        <div style={S.steps}>
-          {STEPS.map((s, i) => (
-            <div
-              key={s.num}
-              style={{
-                ...S.step,
-                borderColor: hov === i ? "#f5a623" : "rgba(245,166,35,.12)",
-                transform: hov === i ? "translateY(-5px)" : "none",
-              }}
-              onMouseEnter={() => setHov(i)}
-              onMouseLeave={() => setHov(null)}
-            >
-              <div style={S.stepNum}>{s.num}</div>
-              <h3 style={S.stepH3}>{s.title}</h3>
-              <p style={S.stepP}>{s.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── Gallery card ─────────────────────────────────────────────────
-function GalleryCard({ item, img, onOpen }) {
-  const [hov, setHov] = useState(false);
-  return (
-    <div
-      style={{
-        ...S.gcard,
-        borderColor: hov ? "rgba(245,166,35,.6)" : "rgba(245,166,35,.1)",
-        transform: hov ? "translateY(-5px)" : "none",
-        boxShadow: hov ? "0 20px 44px rgba(0,0,0,.55)" : "none",
-      }}
-      onClick={() => onOpen({ ...item, img })}
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-    >
-      <img
-        src={img}
-        alt={item.desc}
-        style={{ ...S.gcardImg, transform: hov ? "scale(1.07)" : "scale(1)" }}
-      />
-      <div style={S.gcardOverlay}>
-        <div style={S.gcardSite}>{item.site}</div>
-        <div style={S.gcardDesc}>{item.desc}</div>
-      </div>
-    </div>
-  );
+  return <ProcessSection styles={S} steps={STEPS} />;
 }
 
 // ─── Gallery section ──────────────────────────────────────────────
 function Gallery({ onOpen }) {
   return (
-    <section id="gallery" style={S.gallerySection}>
-      <div style={S.galleryInner}>
-        <div style={S.galleryIntro}>
-          <div style={S.sectionTag}>— Our Projects</div>
-          <h2 style={S.sectionTitle}>Project Showcase</h2>
-          <div style={S.divider} />
-          <p style={S.galleryIntroP}>
-            20 completed projects across Chennai — from our portfolio. Click any
-            image to view full size.
-          </p>
-        </div>
-        <div style={S.galleryGrid}>
-          {GALLERY_PROJECTS.map((item, i) => (
-            <GalleryCard
-              key={i}
-              item={item}
-              img={IMAGES.gallery[i]}
-              onOpen={onOpen}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
+    <GallerySection
+      styles={S}
+      projects={GALLERY_PROJECTS}
+      images={IMAGES.gallery}
+      onOpen={onOpen}
+    />
   );
 }
 
 // ─── Interiors section ────────────────────────────────────────────
 function Interiors({ onOpen }) {
   return (
-    <section id="interiors" style={S.interiorSection}>
-      <div style={S.galleryInner}>
-        <div style={S.galleryIntro}>
-          <div style={S.sectionTag}>— Interior Works</div>
-          <h2 style={S.sectionTitle}>Spaces That Inspire</h2>
-          <div style={S.divider} />
-          <p style={S.galleryIntroP}>
-            From modular kitchens and luxury bedrooms to corporate offices and
-            grand living spaces — our interior work reflects precision
-            craftsmanship and thoughtful design tailored to every client's
-            vision.
-          </p>
-        </div>
-        <div style={S.galleryGrid}>
-          {INTERIOR_PROJECTS.map((item, i) => (
-            <GalleryCard
-              key={i}
-              item={item}
-              img={IMAGES.interiors[i]}
-              onOpen={onOpen}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
+    <InteriorsSection
+      styles={S}
+      projects={INTERIOR_PROJECTS}
+      images={IMAGES.interiors}
+      onOpen={onOpen}
+    />
   );
 }
 
 // ─── Portfolio table ──────────────────────────────────────────────
-function TypeTag({ type }) {
-  if (type === "c") return <span style={S.tagC}>Commercial</span>;
-  if (type === "m") return <span style={S.tagM}>Mixed</span>;
-  return <span style={S.tagR}>Residential</span>;
-}
-
 function Portfolio() {
-  return (
-    <section id="projects" style={S.projectsSection}>
-      <div style={S.projectsInner}>
-        <div style={{ maxWidth: 620, marginBottom: "2.8rem" }}>
-          <div style={S.sectionTag}>— Full Portfolio</div>
-          <h2 style={S.sectionTitle}>A Track Record of Excellence</h2>
-          <div style={S.divider} />
-          <p style={{ color: "#8a9bc4", lineHeight: 1.8, fontSize: ".97rem" }}>
-            Since 2004, Sri Hari Constructions has delivered residential,
-            commercial, and mixed-use projects across Chennai — totalling crores
-            of rupees in construction value.
-          </p>
-        </div>
-        <div style={S.tblWrap}>
-          <table style={S.table}>
-            <thead>
-              <tr>
-                {[
-                  "Client",
-                  "Type",
-                  "Location",
-                  "Period",
-                  "Area (sqft)",
-                  "Value (₹)",
-                ].map((h) => (
-                  <th key={h} style={S.th}>
-                    {h}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {PORTFOLIO_ROWS.map((row, i) => (
-                <tr key={i}>
-                  <td style={S.tdFirst}>{row.client}</td>
-                  <td style={S.td}>
-                    <TypeTag type={row.type} />
-                  </td>
-                  <td style={S.td}>{row.location}</td>
-                  <td style={S.td}>{row.period}</td>
-                  <td style={S.td}>{row.area}</td>
-                  <td style={S.td}>{row.value}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-  );
+  return <PortfolioSection styles={S} rows={PORTFOLIO_ROWS} />;
 }
 
 // ─── Contact ──────────────────────────────────────────────────────
 function Contact() {
-  const [form, setForm] = useState({
-    Name: "",
-    Phone: "",
-    Email: "",
-    ProjectType: "",
-    Location: "",
-    Budget: "",
-    Message: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
-  const handle = (e) =>
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
-  const submit = async (e) => {
-    e.preventDefault();
-    try {
-      const d = new FormData();
-      Object.entries(form).forEach(([k, v]) => d.append(k, v));
-      d.append("_subject", "New Enquiry - Sri Hari Constructions");
-      d.append("_captcha", "false");
-      d.append("_template", "table");
-      const r = await fetch(
-        "https://formsubmit.co/ajax/srihariconstructions.info@gmail.com",
-        { method: "POST", body: d, headers: { Accept: "application/json" } },
-      );
-      if (r.ok) setSubmitted(true);
-      else alert("Failed to send. Please try again.");
-    } catch {
-      alert("Something went wrong. Please try again.");
-    }
-  };
-  const inp = (name, extra = {}) => ({
-    style: S.fgrpInput,
-    name,
-    value: form[name],
-    onChange: handle,
-    onFocus: (e) => (e.target.style.borderColor = "#f5a623"),
-    onBlur: (e) => (e.target.style.borderColor = "rgba(245,166,35,.15)"),
-    ...extra,
-  });
-  return (
-    <section id="contact" style={S.contactSection}>
-      <div style={S.contactInner}>
-        <div style={S.contactGrid}>
-          <div>
-            <div style={S.sectionTag}>— Get In Touch</div>
-            <h2 style={S.sectionTitle}>Start Your Project With Us</h2>
-            <div style={S.divider} />
-            <p style={S.contactInfoP}>
-              Ready to build something meaningful and lasting? Reach out to
-              discuss your residential, commercial, or infrastructure project.
-              Our team is ready to bring your vision to life with quality and
-              precision.
-            </p>
-            {[
-              {
-                icon: "📞",
-                label: "Phone",
-                val: "+91 98765 43210",
-                href: "tel:+919876543210",
-              },
-              {
-                icon: "✉️",
-                label: "Email",
-                val: "srihariconstructions.info@gmail.com",
-                href: "mailto:srihariconstructions.info@gmail.com",
-              },
-              {
-                icon: "📍",
-                label: "Office",
-                val: "Porur, Chennai, Tamil Nadu, India",
-                href: null,
-              },
-            ].map((c) => (
-              <div key={c.label} style={S.citem}>
-                <div style={S.cicon}>{c.icon}</div>
-                <div>
-                  <strong style={S.cdetailStrong}>{c.label}</strong>
-                  {c.href ? (
-                    <a
-                      href={c.href}
-                      style={S.cdetailA}
-                      onMouseEnter={(e) => (e.target.style.color = "#f5a623")}
-                      onMouseLeave={(e) => (e.target.style.color = "#fff")}
-                    >
-                      {c.val}
-                    </a>
-                  ) : (
-                    <span style={S.cdetailA}>{c.val}</span>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-          <div style={S.cform}>
-            <h3 style={S.cformH3}>Send Us a Message</h3>
-            {submitted ? (
-              <div
-                style={{
-                  textAlign: "center",
-                  padding: "2.5rem",
-                  color: "#f5a623",
-                }}
-              >
-                <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>
-                  ✓
-                </div>
-                <p>Thank you! We'll be in touch shortly.</p>
-              </div>
-            ) : (
-              <form onSubmit={submit}>
-                <div style={S.frow}>
-                  <div style={S.fgrp}>
-                    <label style={S.fgrpLabel}>Full Name</label>
-                    <input
-                      {...inp("Name", {
-                        placeholder: "Your Name",
-                        required: true,
-                      })}
-                    />
-                  </div>
-                  <div style={S.fgrp}>
-                    <label style={S.fgrpLabel}>Phone Number</label>
-                    <input
-                      {...inp("Phone", {
-                        placeholder: "+91 XXXXX XXXXX",
-                        required: true,
-                      })}
-                    />
-                  </div>
-                </div>
-                <div style={S.fgrp}>
-                  <label style={S.fgrpLabel}>Email Address</label>
-                  <input
-                    {...inp("Email", {
-                      type: "email",
-                      placeholder: "your@email.com",
-                      required: true,
-                    })}
-                  />
-                </div>
-                <div style={S.fgrp}>
-                  <label style={S.fgrpLabel}>Project Type</label>
-                  <select
-                    {...inp("ProjectType", {
-                      required: true,
-                      style: { ...S.fgrpInput, appearance: "none" },
-                    })}
-                  >
-                    <option value="">Select Project Type</option>
-                    {[
-                      "Residential Construction",
-                      "Commercial Construction",
-                      "Renovation",
-                      "Interior Design",
-                      "Infrastructure Project",
-                    ].map((o) => (
-                      <option key={o}>{o}</option>
-                    ))}
-                  </select>
-                </div>
-                <div style={S.fgrp}>
-                  <label style={S.fgrpLabel}>Project Location</label>
-                  <input
-                    {...inp("Location", {
-                      placeholder: "Enter Project Location",
-                    })}
-                  />
-                </div>
-                <div style={S.fgrp}>
-                  <label style={S.fgrpLabel}>Estimated Budget</label>
-                  <select
-                    {...inp("Budget", {
-                      style: { ...S.fgrpInput, appearance: "none" },
-                    })}
-                  >
-                    <option value="">Select Budget</option>
-                    {[
-                      "Below ₹10 Lakhs",
-                      "₹10 - ₹25 Lakhs",
-                      "₹25 - ₹50 Lakhs",
-                      "₹50 Lakhs - ₹1 Crore",
-                      "Above ₹1 Crore",
-                    ].map((o) => (
-                      <option key={o}>{o}</option>
-                    ))}
-                  </select>
-                </div>
-                <div style={S.fgrp}>
-                  <label style={S.fgrpLabel}>Message</label>
-                  <textarea
-                    {...inp("Message", {
-                      placeholder: "Tell us about your project requirements...",
-                      rows: 6,
-                      required: true,
-                      style: {
-                        ...S.fgrpInput,
-                        resize: "vertical",
-                        minHeight: 100,
-                      },
-                    })}
-                  />
-                </div>
-                <button
-                  type="submit"
-                  style={S.fsubBtn}
-                  onMouseEnter={(e) => (e.target.style.background = "#ffc145")}
-                  onMouseLeave={(e) => (e.target.style.background = "#f5a623")}
-                >
-                  Request Free Consultation
-                </button>
-              </form>
-            )}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+  return <ContactSection styles={S} />;
 }
 
 // ─── Lightbox ─────────────────────────────────────────────────────
 function Lightbox({ item, onClose }) {
-  useEffect(() => {
-    const h = (e) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", h);
-    return () => window.removeEventListener("keydown", h);
-  }, [onClose]);
-  if (!item) return null;
-  return (
-    <div style={S.lightbox} onClick={onClose}>
-      <button style={S.lbClose} onClick={onClose}>
-        ✕
-      </button>
-      <img
-        src={item.img}
-        alt={item.desc}
-        style={S.lbImg}
-        onClick={(e) => e.stopPropagation()}
-      />
-      <div style={S.lbCaption}>
-        {item.site} — {item.desc}
-      </div>
-    </div>
-  );
+  return <LightboxSection styles={S} item={item} onClose={onClose} />;
 }
 
 // ─── App root ─────────────────────────────────────────────────────
