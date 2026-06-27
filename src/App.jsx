@@ -8,7 +8,6 @@ import {
   Process as ProcessSection,
   Gallery as GallerySection,
   Interiors as InteriorsSection,
-  Portfolio as PortfolioSection,
   Contact as ContactSection,
   Lightbox as LightboxSection,
 } from "./components/Sections";
@@ -19,7 +18,6 @@ import {
   GALLERY_PROJECTS,
   INTERIOR_PROJECTS,
   NAV_LINKS,
-  PORTFOLIO_ROWS,
   STATS,
   STEPS,
 } from "./config/content";
@@ -406,6 +404,14 @@ const S = {
     borderRadius: 6,
     transition: "border-color .3s,transform .3s",
   },
+  stepImage: {
+    width: "100%",
+    height: "180px",
+    objectFit: "cover",
+    borderRadius: 6,
+    display: "block",
+    marginBottom: "1.25rem",
+  },
   stepNum: {
     fontFamily: "'Playfair Display',serif",
     fontSize: "4rem",
@@ -470,29 +476,7 @@ const S = {
     lineHeight: 1.35,
   },
 
-  // ── Portfolio table ──
-  projectsSection: { background: "#1a2744", padding: "7rem 6%" },
-  projectsInner: { maxWidth: 1400, margin: "0 auto" },
-  tblWrap: { overflowX: "auto" },
-  table: { width: "100%", borderCollapse: "collapse", fontSize: ".88rem" },
-  th: {
-    textAlign: "left",
-    padding: "1rem 1.2rem",
-    background: "rgba(245,166,35,.08)",
-    color: "#f5a623",
-    fontSize: ".72rem",
-    textTransform: "uppercase",
-    letterSpacing: ".12em",
-    fontWeight: 600,
-    borderBottom: "1px solid rgba(245,166,35,.2)",
-  },
-  td: {
-    padding: "1rem 1.2rem",
-    color: "#8a9bc4",
-    verticalAlign: "middle",
-    borderBottom: "1px solid rgba(255,255,255,.04)",
-  },
-  tdFirst: { color: "#fff", fontWeight: 500 },
+  // ── Tags ──
   tagR: {
     display: "inline-block",
     padding: ".2rem .7rem",
@@ -750,11 +734,6 @@ function Interiors({ onOpen }) {
   );
 }
 
-// ─── Portfolio table ──────────────────────────────────────────────
-function Portfolio() {
-  return <PortfolioSection styles={S} rows={PORTFOLIO_ROWS} />;
-}
-
 // ─── Contact ──────────────────────────────────────────────────────
 function Contact() {
   return <ContactSection styles={S} />;
@@ -783,7 +762,6 @@ export default function SriHariConstructions() {
       <Process />
       <Gallery onOpen={setLbItem} />
       <Interiors onOpen={setLbItem} />
-      <Portfolio />
       <Contact />
       <footer style={S.footer}>
         <div style={S.footerInner}>

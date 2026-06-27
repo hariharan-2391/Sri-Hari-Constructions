@@ -1,4 +1,4 @@
-import logoImg from "../assets/images/logo.jpg";
+import logoImg from "../assets/images/logo.png";
 import heroImg from "../assets/images/hero.jpg";
 
 import g01 from "../assets/images/gallery/01-adayar.jpg";
