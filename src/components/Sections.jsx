@@ -108,6 +108,7 @@ export function Navbar({ styles, links }) {
 export function Hero({ styles, stats, heroImage }) {
   return (
     <section
+      aria-labelledby="hero-title"
       style={{
         position: "relative",
         overflow: "hidden",
@@ -129,7 +130,11 @@ export function Hero({ styles, stats, heroImage }) {
           <div className="anim anim-delay1" style={styles.heroBadge}>
             Est. 2004 · Porur, Chennai
           </div>
-          <h1 className="anim anim-delay2 hero-h1" style={styles.heroH1}>
+          <h1
+            id="hero-title"
+            className="anim anim-delay2 hero-h1"
+            style={styles.heroH1}
+          >
             Building Spaces<em style={styles.heroEm}>That Last.</em>
           </h1>
           <p className="anim anim-delay3 hero-p" style={styles.heroP}>
@@ -193,7 +198,12 @@ export function Hero({ styles, stats, heroImage }) {
 
 export function About({ styles, values }) {
   return (
-    <section id="about" style={styles.aboutSection} className="about-shell">
+    <section
+      id="about"
+      aria-labelledby="about-title"
+      style={styles.aboutSection}
+      className="about-shell"
+    >
       <div style={styles.aboutInner}>
         <div style={styles.aboutGrid} className="about-grid">
           <div>
@@ -290,7 +300,12 @@ export function Process({ styles, steps }) {
   const [hovered, setHovered] = useState(null);
 
   return (
-    <section id="how" style={styles.howSection} className="how-shell">
+    <section
+      id="how"
+      aria-labelledby="process-title"
+      style={styles.howSection}
+      className="how-shell"
+    >
       <div style={styles.howInner}>
         <div style={styles.sectionTag}>— Our Process</div>
         <h2 className="section-title" style={styles.sectionTitle}>
@@ -356,13 +371,18 @@ export function Gallery({ styles, projects, images, onOpen }) {
   return (
     <section
       id="gallery"
+      aria-labelledby="gallery-title"
       style={styles.gallerySection}
       className="gallery-shell"
     >
       <div style={styles.galleryInner}>
         <div style={styles.galleryIntro}>
           <div style={styles.sectionTag}>— Our Projects</div>
-          <h2 className="section-title" style={styles.sectionTitle}>
+          <h2
+            id="gallery-title"
+            className="section-title"
+            style={styles.sectionTitle}
+          >
             Project Showcase
           </h2>
           <div style={styles.divider} />
@@ -391,13 +411,18 @@ export function Interiors({ styles, projects, images, onOpen }) {
   return (
     <section
       id="interiors"
+      aria-labelledby="interiors-title"
       style={styles.interiorSection}
       className="interior-shell"
     >
       <div style={styles.galleryInner}>
         <div style={styles.galleryIntro}>
           <div style={styles.sectionTag}>— Interior Works</div>
-          <h2 className="section-title" style={styles.sectionTitle}>
+          <h2
+            id="interiors-title"
+            className="section-title"
+            style={styles.sectionTitle}
+          >
             Spaces That Inspire
           </h2>
           <div style={styles.divider} />
@@ -434,13 +459,18 @@ export function Portfolio({ styles, rows }) {
   return (
     <section
       id="projects"
+      aria-labelledby="portfolio-title"
       style={styles.projectsSection}
       className="projects-shell"
     >
       <div style={styles.projectsInner}>
         <div style={{ maxWidth: 620, marginBottom: "2.8rem" }}>
           <div style={styles.sectionTag}>— Full Portfolio</div>
-          <h2 className="section-title" style={styles.sectionTitle}>
+          <h2
+            id="portfolio-title"
+            className="section-title"
+            style={styles.sectionTitle}
+          >
             A Track Record of Excellence
           </h2>
           <div style={styles.divider} />
@@ -551,6 +581,7 @@ export function Contact({ styles }) {
   return (
     <section
       id="contact"
+      aria-labelledby="contact-title"
       style={styles.contactSection}
       className="contact-shell"
     >
@@ -558,7 +589,11 @@ export function Contact({ styles }) {
         <div style={styles.contactGrid} className="contact-grid">
           <div>
             <div style={styles.sectionTag}>— Get In Touch</div>
-            <h2 className="section-title" style={styles.sectionTitle}>
+            <h2
+              id="contact-title"
+              className="section-title"
+              style={styles.sectionTitle}
+            >
               Start Your Project With Us
             </h2>
             <div style={styles.divider} />
