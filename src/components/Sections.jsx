@@ -488,7 +488,7 @@ export function Contact({ styles }) {
       data.append("_captcha", "false");
       data.append("_template", "table");
       const response = await fetch(
-        "https://formsubmit.co/ajax/srihariconstructions.info@gmail.com",
+        "https://formsubmit.co/ajax/srihariconstructions.enquiry@gmail.com",
         {
           method: "POST",
           body: data,
@@ -542,14 +542,14 @@ export function Contact({ styles }) {
               {
                 icon: "📞",
                 label: "Phone",
-                value: "+91 98765 43210",
-                href: "tel:+919876543210",
+                value: "+91 78453 97125",
+                href: "tel:+917845397125",
               },
               {
                 icon: "✉️",
                 label: "Email",
-                value: "srihariconstructions.info@gmail.com",
-                href: "mailto:srihariconstructions.info@gmail.com",
+                value: "srihariconstructions.enquiry@gmail.com",
+                href: "mailto:srihariconstructions.enquiry@gmail.com",
               },
               {
                 icon: "📍",

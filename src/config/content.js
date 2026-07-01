@@ -8,8 +8,8 @@ export const NAV_LINKS = [
 
 export const STATS = [
   { num: "20+", label: "Years Experience" },
-  { num: "30+", label: "Projects Completed" },
-  { num: "₹40Cr+", label: "Construction Value" },
+  { num: "50+", label: "Projects Completed" },
+  { num: "₹90Cr+", label: "Construction Value" },
 ];
 
 export const CORE_VALUES = [
@@ -98,6 +98,7 @@ export const GALLERY_PROJECTS = [
   { site: "Site: Crompet", desc: "Contemporary Individual House" },
   { site: "Site: Kilpukam", desc: "Modern Contemporary Apartment" },
   { site: "Site: Korattur", desc: "Neo-Classical Luxury Residential" },
+  { site: "Site: Minjur", desc: "Modern four-storey home with glass balconies and elegant lighting." },
 ];
 
 export const INTERIOR_PROJECTS = [

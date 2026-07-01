@@ -1,5 +1,5 @@
 import logoImg from "../assets/images/logo.png";
-import heroImg from "../assets/images/hero.jpg";
+import heroImg from "../assets/images/hero.png";
 
 import g01 from "../assets/images/gallery/01-adayar.jpg";
 import g02 from "../assets/images/gallery/02-kanthan-nagar.jpg";
@@ -20,7 +20,8 @@ import g16 from "../assets/images/gallery/16-alcon-nagar.jpg";
 import g17 from "../assets/images/gallery/17-aurl-nagar.jpg";
 import g18 from "../assets/images/gallery/18-crompet.jpg";
 import g19 from "../assets/images/gallery/19-kilpukam.jpg";
-import g20 from "../assets/images/gallery/20-korattur.jpg";
+import g20 from "../assets/images/gallery/20-korattur.png";
+import g21 from "../assets/images/gallery/21-minjur.jpg";
 
 import i01 from "../assets/images/interiors/01-modular-kitchen.jpg";
 import i02 from "../assets/images/interiors/02-master-bedroom.jpg";
@@ -60,6 +61,7 @@ export const IMAGES = {
     g18,
     g19,
     g20,
+    g21
   ],
   interiors: [
     i01,
